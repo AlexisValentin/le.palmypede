@@ -6,7 +6,7 @@ interface PageTitleProps {
 }
 
 const PageTitle: React.FC<PageTitleProps> = ({ title, subtitle }) => (
-  <div className="mainWrapper">
+  <div className="pageTitleWrapper">
     <h1>{title}</h1>
     <h2>{subtitle}</h2>
   </div>
