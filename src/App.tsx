@@ -1,20 +1,6 @@
 import './App.css'
-import PageTitle from './components/PageTitle'
-import TextBlock from './components/TextBlock'
+import Parallax from './components/domains/parallax/Parallax'
 
-const App: React.FC = () => (
-  <>
-    <PageTitle title="Le Palmypède" subtitle="Alexis Valentin" />
-    <div className="contentWrapper">
-      <TextBlock text="Bonjour ! Je suis un développeur web front spécialisé en ReactJS, Typescript et NextJS." />
-    </div>
-    <div className="contentWrapper">
-      <TextBlock text="Bonjour ! Je suis un développeur web front spécialisé en ReactJS, Typescript et NextJS." />
-    </div>
-    <div className="contentWrapper">
-      <TextBlock text="Bonjour ! Je suis un développeur web front spécialisé en ReactJS, Typescript et NextJS." />
-    </div>
-  </>
-)
+const App: React.FC = () => <Parallax />
 
 export default App
