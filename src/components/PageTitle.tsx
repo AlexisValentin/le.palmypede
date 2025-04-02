@@ -1,8 +1,8 @@
-import "./PageTitle.css";
+import './PageTitle.css'
 
 interface PageTitleProps {
-  title: string;
-  subtitle?: string;
+  title: string
+  subtitle?: string
 }
 
 const PageTitle: React.FC<PageTitleProps> = ({ title, subtitle }) => (
@@ -10,6 +10,6 @@ const PageTitle: React.FC<PageTitleProps> = ({ title, subtitle }) => (
     <h1>{title}</h1>
     <h2>{subtitle}</h2>
   </div>
-);
+)
 
-export default PageTitle;
+export default PageTitle

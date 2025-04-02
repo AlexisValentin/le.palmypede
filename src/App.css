@@ -1,6 +1,9 @@
 body {
-  font-size: 16px;
+  margin: 0;
   color: white;
   background-color: black;
-  margin: 0 12rem;
+}
+
+.contentWrapper {
+  border: 1px solid white;
 }

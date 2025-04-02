@@ -1,5 +1,8 @@
 .textBlockWrapper {
-  border: 1px solid gray;
-  border-radius: 1.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 60vh;
   padding: 0.8rem 1rem;
 }
