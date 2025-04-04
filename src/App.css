@@ -1,9 +1,15 @@
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('/src/assets/fonts/Ubuntu/Ubuntu-Medium.ttf');
+}
+
 html {
   scroll-snap-type: y mandatory;
+  font-family: 'Ubuntu', monospace;
 }
 
 body {
   margin: 0;
   color: white;
-  background-color: black;
+  background-color: #1b1a18;
 }

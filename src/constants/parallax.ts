@@ -1,6 +1,6 @@
-import TechIcon from '../assets/images/techIcon.svg'
-import ProIcon from '../assets/images/proIcon.svg'
-import IdeaIcon from '../assets/images/ideaIcon.svg'
+import TechIcon from '../assets/icons/techIcon.svg'
+import ProIcon from '../assets/icons/proIcon.svg'
+import IdeaIcon from '../assets/icons/ideaIcon.svg'
 
 interface ParallaxImageType {
   label: string
@@ -11,21 +11,21 @@ interface ParallaxImageType {
 
 export const PARALLAX_IMAGES: ParallaxImageType[] = [
   {
-    label: 'Stacks techniques',
+    label: 'Technos',
     alt: 'Icône représentant des noeuds informatques',
     path: TechIcon,
-    color: '#2ce355',
+    color: '#f9b016',
   },
   {
-    label: 'Expériences professionnelles',
+    label: 'Expériences',
     alt: 'Icône représentant un personnage avec des étoiles',
     path: ProIcon,
-    color: '#e32c97',
+    color: '#1288a6',
   },
   {
-    label: 'Projets annexes',
+    label: 'Projets',
     alt: 'Icône représenant une ampoule englobée dans deux cercles',
     path: IdeaIcon,
-    color: '#e3de2c',
+    color: '#775c89',
   },
 ]
