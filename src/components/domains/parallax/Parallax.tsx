@@ -2,7 +2,7 @@ import { motion, MotionValue, useScroll, useSpring } from 'motion/react'
 import { useRef } from 'react'
 import './Parallax.css'
 import { useParallax } from '../../../hooks/useParallax'
-import { PARALLAX_IMAGES } from '../../../constants/parallax'
+import { GridElementType, PARALLAX_IMAGES } from '../../../constants/parallax'
 import LePalmypedeLogo from '../../../assets/images/lePalmypedeLogo.jpg'
 
 const ParallaxScrollHandler: React.FC = () => {
@@ -25,6 +25,7 @@ interface ParallaxImageItemProps {
   imageRef: React.RefObject<null>
   color: string
   verticalMotion: MotionValue<number>
+  gridElements?: GridElementType[]
 }
 
 const ParallaxImageItem: React.FC<ParallaxImageItemProps> = ({
@@ -35,6 +36,7 @@ const ParallaxImageItem: React.FC<ParallaxImageItemProps> = ({
   imageRef,
   color,
   verticalMotion,
+  gridElements,
 }) => (
   <section className="imageWrapper" key={`image-${label}`} ref={imageRef}>
     <img src={path} alt={alt} />
@@ -54,6 +56,31 @@ const ParallaxImageItem: React.FC<ParallaxImageItemProps> = ({
         >
           {subtitle}
         </motion.h3>
+      )}
+      {gridElements && (
+        <div
+          className={
+            gridElements.length === 2 ? 'gridWrapperInline' : 'gridWrapper'
+          }
+        >
+          {gridElements.map(({ label, icon }) => (
+            <motion.button
+              whileHover={{ scale: 1.5 }}
+              key={`gridElement-${label}`}
+              className="gridElement"
+            >
+              {icon ? (
+                <img
+                  className="gridElementImage"
+                  src={icon}
+                  alt={`${label} icône`}
+                />
+              ) : (
+                label
+              )}
+            </motion.button>
+          ))}
+        </div>
       )}
     </div>
   </section>
@@ -75,7 +102,7 @@ const ParallaxImageHandler: React.FC = () => {
         imageRef={imageRef}
         verticalMotion={verticalMotion}
       />
-      {PARALLAX_IMAGES.map(({ label, alt, path, color }) => (
+      {PARALLAX_IMAGES.map(({ label, alt, path, color, gridElements }) => (
         <ParallaxImageItem
           key={`image-${label}`}
           label={label}
@@ -84,6 +111,7 @@ const ParallaxImageHandler: React.FC = () => {
           color={color}
           imageRef={imageRef}
           verticalMotion={verticalMotion}
+          gridElements={gridElements}
         />
       ))}
     </>
