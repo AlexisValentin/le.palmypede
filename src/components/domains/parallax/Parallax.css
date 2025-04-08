@@ -47,16 +47,6 @@
   font-weight: 500;
 }
 
-.progress {
-  position: fixed;
-  left: 0;
-  right: 0;
-  height: 5px;
-  bottom: 50px;
-  transform: scaleX(0);
-  background: white;
-}
-
 .gridWrapper {
   margin-top: 30px;
   display: grid;

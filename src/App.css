@@ -13,3 +13,9 @@ body {
   color: white;
   background-color: #1b1a18;
 }
+
+.flexContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

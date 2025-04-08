@@ -1,21 +1,11 @@
-import { motion, MotionValue, useScroll, useSpring } from 'motion/react'
-import { useRef } from 'react'
+import { motion, MotionValue, useScroll } from 'motion/react'
+import { useRef, useState } from 'react'
 import './Parallax.css'
 import { useParallax } from '../../../hooks/useParallax'
 import { GridElementType, PARALLAX_IMAGES } from '../../../constants/parallax'
 import LePalmypedeLogo from '../../../assets/images/lePalmypedeLogo.jpg'
-
-const ParallaxScrollHandler: React.FC = () => {
-  const { scrollYProgress } = useScroll()
-
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  })
-
-  return <motion.div className="progress" style={{ scaleX }} />
-}
+import ParallaxScroll from './ParallaxScroll'
+import Modal from '../modal/Modal'
 
 interface ParallaxImageItemProps {
   label: string
@@ -37,54 +27,74 @@ const ParallaxImageItem: React.FC<ParallaxImageItemProps> = ({
   color,
   verticalMotion,
   gridElements,
-}) => (
-  <section className="imageWrapper" key={`image-${label}`} ref={imageRef}>
-    <img src={path} alt={alt} />
-    <div className="titleWrapper">
-      <motion.h2
-        initial={{ visibility: 'hidden' }}
-        animate={{ visibility: 'visible' }}
-        style={{ y: verticalMotion, color }}
-      >
-        {label}
-      </motion.h2>
-      {subtitle && (
-        <motion.h3
+}) => {
+  const [openModal, setOpenModal] = useState<string | undefined>()
+
+  const handleOpenModal = (label: string) => {
+    setOpenModal(label)
+  }
+
+  const handleCloseModal = () => {
+    setOpenModal(undefined)
+  }
+
+  return (
+    <section className="imageWrapper" key={`image-${label}`} ref={imageRef}>
+      <img src={path} alt={alt} />
+      <div className="titleWrapper">
+        <motion.h2
           initial={{ visibility: 'hidden' }}
           animate={{ visibility: 'visible' }}
           style={{ y: verticalMotion, color }}
         >
-          {subtitle}
-        </motion.h3>
-      )}
-      {gridElements && (
-        <div
-          className={
-            gridElements.length === 2 ? 'gridWrapperInline' : 'gridWrapper'
-          }
-        >
-          {gridElements.map(({ label, icon }) => (
-            <motion.button
-              whileHover={{ scale: 1.5 }}
-              key={`gridElement-${label}`}
-              className="gridElement"
-            >
-              {icon ? (
-                <img
-                  className="gridElementImage"
-                  src={icon}
-                  alt={`${label} icône`}
+          {label}
+        </motion.h2>
+        {subtitle && (
+          <motion.h3
+            initial={{ visibility: 'hidden' }}
+            animate={{ visibility: 'visible' }}
+            style={{ y: verticalMotion, color }}
+          >
+            {subtitle}
+          </motion.h3>
+        )}
+        {gridElements && (
+          <div
+            className={
+              gridElements.length === 2 ? 'gridWrapperInline' : 'gridWrapper'
+            }
+          >
+            {gridElements.map(({ label, description, icon }) => (
+              <div className="flexContainer" key={`gridElement-${label}`}>
+                <Modal
+                  title={label}
+                  description={description}
+                  isOpen={openModal === label}
+                  onClose={handleCloseModal}
                 />
-              ) : (
-                label
-              )}
-            </motion.button>
-          ))}
-        </div>
-      )}
-    </div>
-  </section>
-)
+                <motion.button
+                  onClick={() => handleOpenModal(label)}
+                  whileHover={{ scale: 1.5 }}
+                  className="gridElement"
+                >
+                  {icon ? (
+                    <img
+                      className="gridElementImage"
+                      src={icon}
+                      alt={`${label} icône`}
+                    />
+                  ) : (
+                    label
+                  )}
+                </motion.button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}
 
 const ParallaxImageHandler: React.FC = () => {
   const imageRef = useRef(null)
@@ -121,7 +131,7 @@ const ParallaxImageHandler: React.FC = () => {
 const Parallax = () => (
   <>
     <ParallaxImageHandler />
-    <ParallaxScrollHandler />
+    <ParallaxScroll />
   </>
 )
 
